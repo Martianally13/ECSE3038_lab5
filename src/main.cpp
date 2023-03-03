@@ -20,6 +20,7 @@ bool blinkcounter[8][3] =
   {true,true,true}
   }; 
 
+
 //Your Domain/IP Address name with URL route
 const char * endpoint = "URI";
 
@@ -65,13 +66,17 @@ void loop() {
     // Serialise JSON object into a string to be sent to the API
     StaticJsonDocument<64> doc;
     char * httpRequestData;
-    
+
       for(int n = 0; n < 8; n++)
       {
         for(int i = 0; i < 3; i++)
         {
-          doc["light_switch_1"] = blinkcounter[n][i];
-          doc["light_switch_2"] = blinkcounter[n][i]; 
+          digitalWrite(light_switch_1, blinkcounter[n][i]);
+          digitalWrite(light_switch_2, blinkcounter[n][i]);
+          digitalWrite(light_switch_3, blinkcounter[n][i]);
+
+          doc["light_switch_1"] = blinkcounter[n][i]; 
+          doc["light_switch_2"] = blinkcounter[n][i];
           doc["light_switch_3"] = blinkcounter[n][i];
         }
       }
