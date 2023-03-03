@@ -8,7 +8,8 @@
 #define light_switch_2 22
 #define light_switch_3 23
 
-bool blinkcounter[8][3] = {
+bool blinkcounter[8][3] =
+ {
   {false,false,false},
   {false,false,true},
   {false, true, false},
@@ -64,10 +65,17 @@ void loop() {
     // Serialise JSON object into a string to be sent to the API
     StaticJsonDocument<64> doc;
     char * httpRequestData;
-
-    doc["light_switch_1"] = true;
-    doc["light_switch_2"] = false; 
-    doc["light_switch_3"] =  false; 
+    
+      for(int n = 0; n < 8; n++)
+      {
+        for(int i = 0; i < 3; i++)
+        {
+          doc["light_switch_1"] = blinkcounter[n][i];
+          doc["light_switch_2"] = blinkcounter[n][i]; 
+          doc["light_switch_3"] = blinkcounter[n][i];
+        }
+      }
+     
 
 
     //doc["light_switch_1"] = digitalRead(light_switch_1);
